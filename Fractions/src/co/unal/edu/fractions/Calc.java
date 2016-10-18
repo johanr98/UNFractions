@@ -5,29 +5,47 @@
  */
 package co.unal.edu.fractions;
 
+import java.util.Random;
+
 /**
  *
  * @author Estudiante
  */
-
-
 public class Calc {
-    
-    static Sum a = new Sum();
-    static Minus b = new Minus();
-    static Multiply c = new Multiply();
-    static Divide d = new Divide();
-    
-    public static void main(String[] args){
-        Fraction f1 = new Fraction(3, 4);
-        Fraction f2 = new Fraction(5, 4);
-        Fraction[] result = new Fraction[4];
-        result[0] = a.operate(f1,f2);
-        result[1] = b.operate(f1,f2);
-        result[2] = c.operate(f1,f2);
-        result[3] = d.operate(f1,f2);
-        for (int i = 0; i < result.length; i++) {
-            System.out.println(result[i]);
+
+    static Random a = new Random();
+    static Higher b = new Higher();
+
+    public static void main(String[] args) {
+
+        Fraction[] base = new Fraction[20];
+        for (int i = 0; i < base.length; i++) {
+            base[i] = new Fraction(a.nextInt(1000), a.nextInt(1000));
+        }
+        System.out.println("\ninicial\n");
+        for (int i = 0; i < base.length; i++) {
+            System.out.println(base[i]);
+        }
+        for (int i = 0; i < base.length; i++) {
+            base[i].simplify();
+        }
+        System.out.println("\nsimplificadas\n");
+        for (int i = 0; i < base.length; i++) {
+            System.out.println(base[i]);
+        }
+        Fraction temp;
+        for (int i = base.length - 1; i < base.length; i--) {
+            for (int j = 0; j < i; j++) {
+                if (b.operate(base[j], base[j + 1])) {
+                    temp = base[j + 1];
+                    base[j + 1] = base[j];
+                    base[j] = temp;
+                }
+            }
+        }
+        System.out.println("\nordenadas\n");
+        for (int i = 0; i < base.length; i++) {
+            System.out.println(base[i]);
         }
     }
 }

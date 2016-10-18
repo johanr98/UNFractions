@@ -14,15 +14,21 @@ public class Fraction {
 	public Fraction(int numerator, int denominator) {
 		this.numerator = numerator;
 		this.denominator = denominator != 0 ? denominator : 1;
-		simplify();
 	}
 
 	public Fraction() {
 		this(0, 1);
 	}
 
-	public void simplify() {
-		// TODO
+	public void simplify() {    
+                int divisor = 2;
+                while(divisor <= this.numerator && divisor<=this.denominator){
+                    if(this.numerator%divisor ==0 && this.denominator%divisor== 0){
+                        this.numerator=this.numerator/divisor;
+                        this.denominator=this.denominator/divisor;
+                    }
+                    divisor++;
+                }
 	}
 
 	@Override
